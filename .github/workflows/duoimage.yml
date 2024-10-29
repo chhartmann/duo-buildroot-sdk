@@ -3,8 +3,7 @@ name: Bulid Milk-V Duo Image
 on:
   push:
     branches:
-      - develop
-
+      - remoteproc
 env:
   TZ: Asia/Shanghai
 
@@ -15,7 +14,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-
+      with:
+        ref: remoteproc
     - name: Initialization environment
       run: |
         sudo -E apt-get -qq update
@@ -31,14 +31,7 @@ jobs:
       run: |
         echo $PWD
         echo $GITHUB_WORKSPACE
-        bash ./build.sh milkv-duo
-
-    - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh != 'false') || contains(github.event.action, 'ssh')
-      env:
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        bash ./build.sh milkv-duo-sd
 
     - name: Check Image Path
       id: imgpath
