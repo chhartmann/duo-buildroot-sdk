@@ -15,6 +15,7 @@ class MemoryMap:
     # ==============
     # C906L FreeRTOS
     # ==============
+
     FREERTOS_SIZE = 768 * SIZE_1K
     # FreeRTOS is at the end of DRAM
     FREERTOS_ADDR = DRAM_BASE + DRAM_SIZE - FREERTOS_SIZE
