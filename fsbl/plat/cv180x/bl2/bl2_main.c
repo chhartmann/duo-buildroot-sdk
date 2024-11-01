@@ -100,6 +100,8 @@ void bl2_main(void)
 
 	set_rtc_en_registers();
 
+	load_ddr();
+
 	/* If GP15's value is high, enter debug mode. */
 	if (mmio_read_32(GPIO_BASE + 0x050) & (1 << 15)) {
 		NOTICE("=========================================\n");
@@ -120,7 +122,6 @@ void bl2_main(void)
 			;
 	}	
 	
-	load_ddr();
 #ifdef OD_CLK_SEL
 	load_rest_od_sel();
 #else
